@@ -1,7 +1,11 @@
 package com.saman.eventhub.db.h2
 
-import com.saman.eventhub.db.DBUtils
+import java.sql.ResultSet
 
-class H2Utils extends DBUtils {
+import com.saman.eventhub.db.DBAccess
 
+class H2Utils extends DBAccess {
+  override def insert(table: String, values: List[(String, Any)]): Unit = ???
+
+  override def read[T](query: String, resultSetExtractor: ResultSet => T): T = ???
 }

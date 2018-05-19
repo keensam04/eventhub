@@ -1,6 +1,6 @@
 package com.saman.eventhub.rest
 
-import com.google.gson.{Gson, JsonArray, JsonElement, JsonObject}
+import com.google.gson._
 
 import scala.util.Try
 
@@ -49,6 +49,8 @@ object Aggregations {
   }
 
   def operate(items: List[JsonElement], key: String, operation: String): JsonElement = {
+    if (items.isEmpty)
+      return JsonNull.INSTANCE
     operation match {
       case "MIN" => min(items.map(item => item.asInstanceOf[JsonObject]), key)
       case "MAX" => max(items.map(item => item.asInstanceOf[JsonObject]), key)
@@ -65,7 +67,13 @@ object Aggregations {
         jsonObject.addProperty(key, average(items.map(item => item.asInstanceOf[JsonObject]), key))
         jsonObject
       case _ =>
-        gson.fromJson(items.mkString("[", ",", "]"), classOf[JsonArray])
+        if (items.head.isInstanceOf[JsonArray]) {
+          val array = new JsonArray
+          for (item <- items)
+            array.addAll(item.asInstanceOf[JsonArray])
+          array
+        } else
+          gson.fromJson(items.mkString("[", ",", "]"), classOf[JsonArray])
     }
   }
 }

@@ -98,7 +98,7 @@ object ServiceHandler {
     var lowerBound = from - (from % segmentInterval)
     do {
       val upperBound = lowerBound + segmentInterval
-      val segment = s"/segments/$source/$lowerBound-$upperBound"
+      val segment = s"$source/$lowerBound-$upperBound"
       val rangeLower = if (lowerBound < from) from else lowerBound
       val rangeUpper = if (upperBound > to) to else upperBound
       subRanges.put(Range.openClosed(rangeLower, rangeUpper), segment)

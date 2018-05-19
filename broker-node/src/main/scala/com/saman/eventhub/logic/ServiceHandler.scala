@@ -4,7 +4,7 @@ import java.lang.{Long => jLong}
 import java.time.Instant
 
 import com.google.common.collect.Range
-import com.google.gson.{Gson, JsonElement, JsonObject}
+import com.google.gson.{Gson, JsonElement}
 import com.saman.eventhub.rest.Aggregations
 import com.saman.eventhub.utils.ApplicationProperties.get
 import com.saman.eventhub.zk.ZkUtils
@@ -53,6 +53,7 @@ object ServiceHandler {
       })
       .filter(response => response.isDefined)
       .map(response => response.get)
+      .filter(json => !json.isJsonNull)
       .toList
 
     gson.toJson(Aggregations.operate(listOfResponse, metric, aggregation))

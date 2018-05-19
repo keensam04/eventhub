@@ -27,8 +27,19 @@ object ZkUtilsTest extends App {
       val eventType = event.getType
     }
   })
-  zkUtils1.createEphemeralZNode("/ephemeralPath/path4", () => "testData4".getBytes())
+  zkUtils1.createEphemeralZNode("/ephemeralPath/path6")
+  zkUtils1.setData("/ephemeralPath/path6", () => "asdf".getBytes())
+  zkUtils1.setData("/ephemeralPath/path6", () => "qwerty".getBytes())
   zkUtils1.closeConnection
+
+//  zkUtils1.createIfNotExists("/tasks/historical-nodes", () => null)
+//  zkUtils1.watch("/tasks/real-time-nodes", bytes => {
+//    val string = new String(bytes)
+//    val list = string.split(",").toList
+//    println(list)
+//  })
+//
+//  zkUtils2.setData("/tasks/real-time-nodes", "tenant1,tenant2".getBytes)
 
   _wait.await()
 }

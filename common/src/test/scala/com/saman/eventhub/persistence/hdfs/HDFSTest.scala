@@ -1,5 +1,7 @@
 package com.saman.eventhub.persistence.hdfs
 
+import java.util.Collections
+
 import com.google.gson.JsonObject
 
 object HDFSTest extends App{
@@ -9,6 +11,6 @@ object HDFSTest extends App{
 
   val jsonObject = new JsonObject()
   jsonObject.addProperty("key", "value")
-  hdfs.saveData("hdfs/test.json", Seq(jsonObject))
+  hdfs.saveData("hdfs/test.json", Collections.singletonList(jsonObject))
   print(hdfs.getData("hdfs/test.json"))
 }

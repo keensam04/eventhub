@@ -10,7 +10,7 @@ class MySQLAccess(url: String, user: String, password: String) extends DBAccess 
 
   private lazy val jdbcTemplate = {
     val dataSource = new DriverManagerDataSource(url, user, password)
-    dataSource.setDriverClassName("com.mysql.jdbc.Driver")
+    dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver")
     new JdbcTemplate(dataSource)
   }
 

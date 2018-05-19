@@ -11,5 +11,12 @@
 
     <artifactId>data-generator</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.saman.eventhub</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
